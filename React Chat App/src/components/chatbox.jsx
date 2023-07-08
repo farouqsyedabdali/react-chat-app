@@ -18,7 +18,8 @@ const Chatbox = () => {
       collection(db, "messages"),
       orderBy("createdAt"),
       limit(50)
-      );
+    );
+
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const messages = [];
       querySnapshot.forEach((doc) => {
@@ -32,12 +33,14 @@ const Chatbox = () => {
 
   return (
     <div className="pb-44 pt-20 containerWrap">
-      {messages.map(message => (
-        <Message key={message.id} message={message} />
-      ))}
+      {messages.map((message, index) => {
+        const showUsername = index === 0 || messages[index - 1].uid !== message.uid;
+        const showProfilePic = index === messages.length - 1 || messages[index + 1].uid !== message.uid;
+        return <Message key={message.id} message={message} showUsername={showUsername} showProfilePic={showProfilePic} />
+      })}
       <div ref={messagesEndRef}></div>
     </div>
   )
 }
 
-export default Chatbox
+export default Chatbox;

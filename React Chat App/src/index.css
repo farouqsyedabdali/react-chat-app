@@ -5,3 +5,42 @@
 .containerWrap {
   @apply container mx-auto max-w-4xl
 }
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+.errorMessageText {
+  transition: opacity 300ms ease-in;
+}
+
+.errorMessageContainer {
+  position: absolute;
+  bottom: 140px;
+  left: 50%; /* Set the left position to 50% */
+  transform: translateX(-50%); /* Move the container 50% of its width to the left */
+  width: 1000px;
+}
+
+.current-theme-color {
+  background-color: #4F46E5;
+  color: white;
+}
+
+.sidebar-menu-items {
+  padding-right: 80px;
+}
