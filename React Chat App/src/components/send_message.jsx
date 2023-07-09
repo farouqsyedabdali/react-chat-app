@@ -13,7 +13,7 @@ const SendMessage = () => {
     e.preventDefault();
 
     if (value.trim() === "") {
-      setErrorMessage("Enter valid message!");
+      setErrorMessage("Enter a valid message!");
       return;
     }
 
@@ -27,7 +27,7 @@ const SendMessage = () => {
         uid,
       });
     } catch (error) {
-      console.log("error while sending message")
+      console.log("Error while sending message:", error);
     }
 
     setValue("");
@@ -44,15 +44,23 @@ const SendMessage = () => {
   }, [errorMessage]);
 
   return (
-    <div className="bg-gray-200 fixed bottom-0 w-full py-10 shadow-lg">
+    <div className="current-theme-color-accent fixed bottom-0 w-full py-10 shadow-lg">
       <form onSubmit={handleSendMessage} className="px-2 containerWrap flex">
-        <input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          className="input w-full focus:outline-none bg-gray-100 rounded-r-none"
-          type="text"
-        />
-        <button type="submit" className="w-auto bg-gray-500 text-white rounded-r-lg px-5 text-sm">
+        <div className="relative w-full">
+          <input
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            className="input w-full focus:outline-none bg-gray-100 rounded-r-none"
+            type="text"
+          />
+          {value.trim() === "" && (
+            <p className="send-message-text absolute top-0 left-0 mt-1 ml-2 text-xs text-gray-300">Send a message</p>
+          )}
+        </div>
+        <button
+          type="submit"
+          className="w-auto current-theme-color-primary text-white rounded-r-lg px-5 text-sm"
+        >
           Send
         </button>
       </form>

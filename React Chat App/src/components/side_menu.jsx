@@ -1,10 +1,24 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 
 const SideMenu = (props) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const handleDrawerClose = () => {
-    props.toggleDrawer(); // Call the toggleDrawer function from props
+    props.toggleDrawer();
   };
+
+  const handleThemeChange = (newTheme) => {
+    props.setTheme(newTheme);
+  };
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', props.theme); 
+  }, [props.theme]);
 
   return (
     <div className="drawer z-10">
@@ -17,14 +31,38 @@ const SideMenu = (props) => {
       />
       <div className="drawer-side">
         <label htmlFor="my-drawer" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content relative sidebar-menu-items"> {/* Add padding-right */}
+        <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content relative sidebar-menu-items">
           {/* Sidebar content here */}
-          <li>
-            <a>Sidebar Item 1</a>
-          </li>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
+          <div className="menu p-4 w-70 h-full bg-base-200 text-base-content sidebar-menu-items">
+            <div className="dropdown dropdown-hover">
+              <button tabIndex={0} className="btn m-1 current-theme-color-primary" onClick={handleDropdownToggle}>
+                Themes
+              </button>
+              {isDropdownOpen && (
+                <div className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                  <button className="btn btn-active current-theme-color-primary mb-2" onClick={() => handleThemeChange('dark')}>
+                    Dark
+                  </button>
+                  <button className="btn btn-active current-theme-color-primary mb-2" onClick={() => handleThemeChange('light')}>
+                    Light
+                  </button>
+                  <button className="btn btn-active current-theme-color-primary mb-2" onClick={() => handleThemeChange('synthwave')}>
+                    Synthwave
+                  </button>
+                  <button className="btn btn-active current-theme-color-primary mb-2" onClick={() => handleThemeChange('cupcake')}>
+                    Cupcake
+                  </button>
+                  <button className="btn btn-active current-theme-color-primary mb-2" onClick={() => handleThemeChange('dracula')}>
+                    Dracula
+                  </button>
+                  <button className="btn btn-active current-theme-color-primary mb-2" onClick={() => handleThemeChange('aqua')}>
+                    Aqua
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
           <div className="absolute top-0 right-0 m-4">
             <button className="btn btn-square btn-outline" onClick={handleDrawerClose}>
               <svg
@@ -47,6 +85,8 @@ const SideMenu = (props) => {
 SideMenu.propTypes = {
   toggleDrawer: PropTypes.func.isRequired,
   isDrawerOpen: PropTypes.bool.isRequired,
+  theme: PropTypes.string.isRequired,
+  setTheme: PropTypes.func.isRequired,
 };
 
 export default SideMenu;

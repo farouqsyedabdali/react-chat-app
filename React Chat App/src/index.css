@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .containerWrap {
-  @apply container mx-auto max-w-4xl
+  @apply container mx-auto max-w-4xl;
 }
 
 .fade-enter {
@@ -31,16 +31,28 @@
 .errorMessageContainer {
   position: absolute;
   bottom: 140px;
-  left: 50%; /* Set the left position to 50% */
-  transform: translateX(-50%); /* Move the container 50% of its width to the left */
+  left: 50%;
+  transform: translateX(-50%);
   width: 1000px;
 }
 
-.current-theme-color {
-  background-color: #4F46E5;
-  color: white;
+.current-theme-color-primary {
+  background-color: hsl(var(--p));
+  color: hsl(var(--pc));
+  border-color: hsl(var(--p));
 }
 
-.sidebar-menu-items {
-  padding-right: 80px;
+.current-theme-color-accent {
+  background-color: hsl(var(--a));
+  color: hsl(var(--ac));
+  border-color: hsl(var(--a));
+}
+
+.send-message-text {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  padding-right: 10px;
+  font-size: small;
 }

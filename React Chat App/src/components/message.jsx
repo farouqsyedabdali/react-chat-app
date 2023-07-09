@@ -18,7 +18,7 @@ const Message = ({ message, showUsername, showProfilePic }) => {
         <div className="chat-header">
           {showUsername && message.username}
         </div>
-        <div className={`chat-bubble ${isCurrentUserMessage ? 'current-theme-color' : ''}`}>
+        <div className={`chat-bubble ${isCurrentUserMessage ? 'current-theme-color-primary' : ''}`}>
           {message.text}
         </div>
       </div>
